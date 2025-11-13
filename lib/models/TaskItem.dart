@@ -1,5 +1,7 @@
 
 
+import 'package:flutter/cupertino.dart';
+
 class Taskitem {
   int id = 0;
   String title = " ";
@@ -8,13 +10,12 @@ class Taskitem {
   bool isCompleted = false;
 
 
-  Taskitem(int id, String title, String priority, String description,
-      bool isCompleted) {
-    this.id = id;
+  Taskitem(String title, String priority, String description) {
+   // this.id = id;
     this.title = title;
     this.priority = priority;
     this.description = description;
-    this.isCompleted = isCompleted;
+   // this.isCompleted = isCompleted;
   }
 
   Map<String,dynamic> toJson(){
@@ -36,7 +37,9 @@ class Taskitem {
     String description=map['description'];
     bool isCompleted=map['isCompleted'];
 
-    Taskitem task=Taskitem(id, title, priority, description, isCompleted);
+    Taskitem task=Taskitem(title, priority, description);
+    task.id=id;
+    task.isCompleted=isCompleted;
     return task;
   }
 

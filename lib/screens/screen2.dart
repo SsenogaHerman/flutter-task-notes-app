@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
+import 'package:task_notes_manager/models/TaskItem.dart';
 
 class Screen2 extends StatefulWidget {
   const Screen2({super.key});
@@ -34,7 +35,7 @@ class _Screen2State extends State<Screen2> {
 
               ),
 
-              SizedBox(width: 500,
+              SizedBox(width: 300,
                 child: FormBuilderTextField(
                   name: 'title',
                   decoration: InputDecoration(
@@ -45,8 +46,8 @@ class _Screen2State extends State<Screen2> {
               ),
               SizedBox(height:20),
               SizedBox(
-                width: 500,
-                child: FormBuilderDropdown(name: 'Priority',
+                width: 300,
+                child: FormBuilderDropdown(name: 'priority',
                     decoration: InputDecoration(
                         labelText: "Priority",
                         border: OutlineInputBorder()
@@ -60,7 +61,7 @@ class _Screen2State extends State<Screen2> {
               ),
               SizedBox(height: 20,),
 
-              SizedBox(width: 500,
+              SizedBox(width: 300,
                 child: FormBuilderTextField(
                   name: 'description',
                   maxLines: 3,
@@ -71,8 +72,17 @@ class _Screen2State extends State<Screen2> {
                 ),
               )
               ,SizedBox(height: 20,),
-              ElevatedButton(onPressed: (){ 
-                
+              ElevatedButton(onPressed: (){
+                if (_formKey.currentState!.saveAndValidate()) {
+                  final data = _formKey.currentState!.value;
+                  print(data);
+                  Taskitem task=Taskitem(data['title'],data['priority'], data['description']);
+                print("After converting to object");
+                 print(task.toJson());
+                  _formKey.currentState!.reset(); // clear inputs
+                }
+
+
               }, child: Text('ADD TASK'))
             ],
           ),
@@ -81,6 +91,7 @@ class _Screen2State extends State<Screen2> {
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
 
       floatingActionButton: FloatingActionButton(onPressed: (){
+
         context.goNamed('home');
 
       },
