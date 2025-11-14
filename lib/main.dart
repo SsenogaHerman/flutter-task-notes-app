@@ -51,11 +51,8 @@ class _MyAppState extends State<MyApp> {
           path: '/',
           builder: (context, state) => Home(
             theme: theme,
-            onThemeChanged: (bool newValue) {
-              setState(() {
-                theme = newValue;
-              });
-            },
+              onThemeChanged: _updateTheme,
+
           ),
         ),
         GoRoute(
