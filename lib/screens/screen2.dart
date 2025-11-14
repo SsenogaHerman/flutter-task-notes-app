@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_notes_manager/models/TaskItem.dart';
+import 'package:task_notes_manager/services/database_helper.dart';
 
 class Screen2 extends StatefulWidget {
   const Screen2({super.key});
@@ -72,7 +73,7 @@ class _Screen2State extends State<Screen2> {
                 ),
               )
               ,SizedBox(height: 20,),
-              ElevatedButton(onPressed: (){
+              ElevatedButton(onPressed: () async {
                 if (_formKey.currentState!.saveAndValidate()) {
                   final data = _formKey.currentState!.value;
                   print(data);
@@ -80,6 +81,13 @@ class _Screen2State extends State<Screen2> {
                 print("After converting to object");
                  print(task.toJson());
                   _formKey.currentState!.reset(); // clear inputs
+
+                  int id=await database_helper.instance.insertTask(task);
+                  if(id>0){
+                    print("Object inserted:id{$id}");
+                  }
+
+
                 }
 
 

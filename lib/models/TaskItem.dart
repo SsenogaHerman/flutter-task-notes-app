@@ -3,11 +3,11 @@
 import 'package:flutter/cupertino.dart';
 
 class Taskitem {
-  int id = 0;
+  int? id;
   String title = " ";
   String priority = " ";
   String description = " ";
-  bool isCompleted = false;
+  int isCompleted = 0;
 
 
   Taskitem(String title, String priority, String description) {
@@ -35,7 +35,7 @@ class Taskitem {
     String title=map['title'];
     String priority =map['priority'];
     String description=map['description'];
-    bool isCompleted=map['isCompleted'];
+    int isCompleted=map['isCompleted'];
 
     Taskitem task=Taskitem(title, priority, description);
     task.id=id;
